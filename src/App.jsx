@@ -17,11 +17,13 @@ import { platos } from "./components/Category";
 import { ShoppingCartProvider } from './components/ShoppingCartContext';
 import Item from "./components/Item";
 import Checkout from "./components/Checkout";
+import ItemList from "./components/ItemList";
 
 function App() {
   const [showMenu, setShowMenu] = useState(false);
   const [showOrder, setShowOrder] = useState(false);
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState('Todos');
+  const [busqueda, setBusqueda] = useState('');  
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -37,12 +39,12 @@ function App() {
     setCategoriaSeleccionada(category);
   };
 
-  const filtrarPlatos = (category) => {
-    if (category === "Todos") {
-      return platos;
-    } else {
-      return platos.filter((plato) => plato.category === category);
-    }
+  const filtrarPlatos = () => {
+    const productosFiltrados = platos.filter((plato) => 
+      plato.nombre.toLowerCase().includes(busqueda.toLowerCase()) &&
+      (categoriaSeleccionada === 'Todos' || plato.category === categoriaSeleccionada)
+    );
+    return productosFiltrados;
   };
 
   return (
@@ -73,7 +75,11 @@ function App() {
                 <main className="lg:pl-32 lg:pr-96 pb-20">
                   <div className="md:p-8 p-4">
                     {/* Header */}
-                    <Header cambiarCategoria={cambiarCategoria} categoriaSeleccionada={categoriaSeleccionada} />
+                    <Header 
+                      cambiarCategoria={cambiarCategoria} 
+                      categoriaSeleccionada={categoriaSeleccionada} 
+                      setBusqueda={setBusqueda} // Pasar setBusqueda al Header
+                    />
                     {/* Title Content */}
                     <div className="flex items-center justify-between mb-16">
                       <h1 className="text-xl text-gray-300">Elegir plato</h1>

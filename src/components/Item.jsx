@@ -46,7 +46,7 @@ const Item = () => {
           <span>${calcularTotal()}</span>
         </div>
       </div>
-      <div className="mt-8">
+      <div className="mt-8 flex space-x-4">
         <button
           onClick={() => navigate('/')} // Redirige al inicio
           className="bg-[#28cfe7] text-white py-2 px-4 rounded-lg"
@@ -57,7 +57,7 @@ const Item = () => {
           onClick={() => navigate('/checkout')} // Redirige a checkout
           className="bg-[#28cfe7] text-white py-2 px-4 rounded-lg"
         >
-          Ir a Checkout
+          Finalizar Compra
         </button>
       </div>
     </div>

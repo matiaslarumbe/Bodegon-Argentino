@@ -112,11 +112,13 @@ import { RiVisaFill } from "react-icons/ri";
 import { FaCcMastercard } from "react-icons/fa6";
 import { FaMoneyBillAlt } from "react-icons/fa";
 import { SiMercadopago } from "react-icons/si";
+import { useNavigate } from 'react-router-dom';
 
 const Checkout = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [submitted, setSubmitted] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState('');
+  const navigate = useNavigate(); // Usa useNavigate para manejar la navegación
 
   const onSubmit = (data) => {
     console.log({ ...data, paymentMethod });
@@ -128,9 +130,16 @@ const Checkout = () => {
       <h1 className="text-2xl lg:text-3xl mb-6 lg:mb-8">Finalizar la Compra</h1>
       
       {submitted ? (
-        <div className="text-center text-green-500 text-xl lg:text-2xl">
-          ¡Gracias por su compra!
-        </div>
+        <div className="flex flex-col items-center text-center text-green-500 text-xl lg:text-2xl">
+        ¡Gracias por su compra!
+        <button
+          onClick={() => navigate('/')} 
+          className="mt-4 bg-[#28cfe7] text-white py-2 px-4 rounded-lg"
+        >
+          Volver al Inicio
+        </button>
+      </div>
+      
       ) : (
         <form onSubmit={handleSubmit(onSubmit)} className="max-w-xs lg:max-w-md mx-auto">
           <div className="mb-4">

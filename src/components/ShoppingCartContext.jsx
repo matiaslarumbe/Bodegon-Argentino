@@ -27,8 +27,12 @@ export const ShoppingCartProvider = ({ children }) => {
     setCart((prevCart) => prevCart.filter((_, i) => i !== index));
   };
 
+  const clearCart = () => {
+    setCart([]);
+  };
+
   return (
-    <ShoppingCartContext.Provider value={{ cart, addToCart, removeFromCart }}>
+    <ShoppingCartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart }}>
       {children}
     </ShoppingCartContext.Provider>
   );
